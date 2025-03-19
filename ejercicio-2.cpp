@@ -1,16 +1,19 @@
 #include <iostream>
-#include <string>
+#include <string> 
 #include <fstream>
 
 using namespace std;
 
+// Enumeracion para los tipos de mensajes
 enum TYPEMESSAGE {DEBUG, INFO, WARNING, ERROR, CRITICAL};
 
+// Declaro las funciones y ademas hago sobre carga de funciones
 void logMessage(string mensaje, int tipomensaje);
 void logMessage(string mensaje, string archivo, int linea_error);
 void logMessage(string mensaje, string usuario);
 
 int main() {
+    // Pruebas de los mensajes
     logMessage("Se esta debugeando el sistema", DEBUG);
     logMessage("Informacion: el sol sale todo los dias (conocimiento ampliativo)", INFO);
     logMessage("Se rompio la pc, llamar a soporte", WARNING);
@@ -19,14 +22,33 @@ int main() {
     logMessage("Este mensaje no llega a ningun lado", 5);
     logMessage("Exploto el codigo", "ejercicio-2.cpp", 30);
     logMessage("Acceso garantizado", "admin");
+    try {
+        cout << "Division entera de dos numeros" << endl;
+        int x;
+        cout << "Ingrese el valor de x: ";
+        cin >> x;
+        int y;
+        cout << "Ingrese el valor de y: ";
+        cin >> y;
+        if (y == 0) {
+            throw "Division por cero";
+        }
+        cout << x / y << endl;
+    } catch (const char* e) {
+        // Causo un error en runtime
+        logMessage(e, "ejercicio-2.cpp", 32);
+        return 1;
+    }
     return 0;
 }
 
 void logMessage(string mensaje, int tipomensaje)
 {
+    // Abro el archivo en modo append
     ofstream outFile("Mensajes.txt", ios::app);
     if (outFile.is_open())
     {
+        // Dependiendo del tipo de mensaje imprimo
         switch (tipomensaje)
         {
         case DEBUG:
@@ -52,6 +74,7 @@ void logMessage(string mensaje, int tipomensaje)
     }
     else
     {
+        // Por si no se puede abrir el archivo
         cout << "Error al abrir el archivo" << endl;
     }
     outFile.close();
@@ -59,6 +82,7 @@ void logMessage(string mensaje, int tipomensaje)
 
 void logMessage(string mensaje, string archivo, int linea_error)
 {
+    // Mismo funcionamiento que la primera funcion
     ofstream outFile("Mensajes.txt", ios::app);
     if (outFile.is_open())
     {
@@ -73,6 +97,7 @@ void logMessage(string mensaje, string archivo, int linea_error)
 
 void logMessage(string mensaje, string usuario)
 {
+    // Mismo funcionamiento que la primera funcion
     ofstream outFile("Mensajes.txt", ios::app);
     if (outFile.is_open())
     {
