@@ -9,3 +9,4 @@ g++ ejercicio-X.cpp -o NOMBRE DE EJECUTABLE
 -fstream
 -string
 -memory
+-chrono
