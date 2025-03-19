@@ -7,6 +7,8 @@ using namespace std;
 enum TYPEMESSAGE {DEBUG, INFO, WARNING, ERROR, CRITICAL};
 
 void logMessage(string mensaje, int tipomensaje);
+void logMessage(string mensaje, string archivo, int linea_error);
+void logMessage(string mensaje, string usuario);
 
 int main() {
     logMessage("Se esta debugeando el sistema", DEBUG);
@@ -15,6 +17,8 @@ int main() {
     logMessage("Error se mojo la mother y la grafica", ERROR);
     logMessage("Esta lloviendo mucho", CRITICAL);
     logMessage("Este mensaje no llega a ningun lado", 5);
+    logMessage("Exploto el codigo", "ejercicio-2.cpp", 30);
+    logMessage("Acceso garantizado", "admin");
     return 0;
 }
 
@@ -45,6 +49,34 @@ void logMessage(string mensaje, int tipomensaje)
             outFile << "[UNKNOWN] <Error desconocido> "<<  endl;
             break;
         }
+    }
+    else
+    {
+        cout << "Error al abrir el archivo" << endl;
+    }
+    outFile.close();
+}
+
+void logMessage(string mensaje, string archivo, int linea_error)
+{
+    ofstream outFile("Mensajes.txt", ios::app);
+    if (outFile.is_open())
+    {
+        outFile << "[ERROR] <" << mensaje << "> [ARCHIVO: " << archivo << "][LINEA: " << linea_error <<"]" <<endl;
+    }
+    else
+    {
+        cout << "Error al abrir el archivo" << endl;
+    }
+    outFile.close();
+}
+
+void logMessage(string mensaje, string usuario)
+{
+    ofstream outFile("Mensajes.txt", ios::app);
+    if (outFile.is_open())
+    {
+        outFile << "[SECURITY] <" << mensaje << "> [USUARIO: " << usuario <<"]" <<endl;
     }
     else
     {
