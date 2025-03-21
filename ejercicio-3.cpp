@@ -215,12 +215,6 @@ void print_lista(Lista &lista)
 bool borrar_ultimo(Lista &lista)
 {
     // Funcion auxiliar para borrar el ultimo elemento
-    if (lista.size == 0)
-    {
-        // Caso en que la lista esta vacia
-        cout << "Lista vacia" << endl;
-        return false;
-    }
     if (lista.size == 1)
     {
         // Caso en que la lista tiene un solo elemento
