@@ -161,6 +161,11 @@ bool insert(Lista &lista, size_t pos, int valor)
 
 bool borrar(Lista &lista, size_t pos)
 {
+    if (lista.size == 0)
+    {
+        cout << "Lista vacia" << endl;
+        return false;
+    }
     if (pos >= lista.size)
     {
         // Caso en que la posicion es mayor al tamaño de la lista
