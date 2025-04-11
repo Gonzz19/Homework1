@@ -6,7 +6,7 @@ using namespace std;
 
 // Declaro la función recursiva que compara dos cadenas de texto
 bool cadenas_iguales(string cadena1, string cadena2, int index = 0);
-constexpr bool cadenas_iguales2(char* cadena1, char* cadena2, int index = 0);
+constexpr const bool cadenas_iguales2(const char* cadena1,const char* cadena2, int index);
 
 int main()
 {
@@ -26,7 +26,7 @@ int main()
 
     // Mido el tiempo de ejecución de la función recursiva en compilado
     auto start2 = chrono::high_resolution_clock::now();
-    bool iguales2 = cadenas_iguales(cadena3, cadena4);
+    const bool iguales2 = cadenas_iguales2(cadena3, cadena4, 0);
     auto end2 = chrono::high_resolution_clock::now();
     auto duration2 = chrono::duration_cast<chrono::nanoseconds>(end2 - start2);
     cout << "Tiempo de ejecución: " << duration2.count() << " ns" << endl;
@@ -45,11 +45,11 @@ bool cadenas_iguales(string cadena1, string cadena2, int index)
     return cadenas_iguales(cadena1, cadena2, index + 1);
 }
 
-constexpr bool cadenas_iguales2(const char* cadena1,const char* cadena2, int index = 0)
+constexpr const bool cadenas_iguales2(const char* cadena3,const char* cadena4, int index = 0)
 {
     // Aca utilizo char* por la eficiencia, y ademas es lo unico que puedo utilizar en una funcion constexpr
-    if (&cadena1[index] == "\0" && &cadena2[index] == "\0") return true;
-    if (&cadena1[index] == "\0" || &cadena2[index] == "\0") return false;
-    if (cadena1[index] != cadena2[index]) return false;
-    return cadenas_iguales2(cadena1, cadena2, index+1);
+    if (&cadena3[index] == "\0" && &cadena4[index] == "\0") return true;
+    if (&cadena3[index] == "\0" || &cadena4[index] == "\0") return false;
+    if (cadena3[index] != cadena4[index]) return false;
+    return cadenas_iguales2(cadena3, cadena4, index+1);
 }
